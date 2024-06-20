@@ -1,5 +1,3 @@
-const productForm=document.getElementById('productForm')
-
 productForm.addEventListener('submit', async function(event) {
   event.preventDefault(); 
   
@@ -25,13 +23,17 @@ productForm.addEventListener('submit', async function(event) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
-    document.getElementById('response').textContent = JSON.stringify(result, null, 2);
+    const responseElement = document.getElementById('response');
+    responseElement.textContent = 'Product created successfully! Redirecting...';
+
+    setTimeout(() => {
+      window.location.href = './layout.html'
+    }, 1500); 
+
   } catch (error) {
     document.getElementById('response').textContent = 'Error: ' + error.message;
   }
 });
-
 
 
 
