@@ -17,7 +17,6 @@ const productRoute = require("./routes/product.route.js")
 app.use("/api/products",productRoute)
 
 
-
 app.listen(PORT,()=>{
   console.log("Running")
 })
@@ -38,3 +37,22 @@ mongoose.connect('mongodb+srv://himikatasnim:u2WLsD9CXpz1ylK2@cluster0.u1yn5px.m
   })
 
 
+
+// tahsin
+const dotenv = require("dotenv");
+const path = require("path");
+const userRoutes = require('./routes/userRoutes');
+const { errorHandler, notFound } = require('./middlewares/errorMiddleware');
+dotenv.config();
+
+app.use('/api/auth', userRoutes);
+
+const clientPath = path.join(__dirname, '../client');
+app.use(express.static(clientPath));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(clientPath, 'index.html'));
+});
+
+app.use(notFound);
+app.use(errorHandler);
