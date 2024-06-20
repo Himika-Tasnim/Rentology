@@ -2,6 +2,7 @@ productForm.addEventListener('submit', async function(event) {
   event.preventDefault(); 
   
   const form = event.target;
+  console.log(form)
   const formData = new FormData(form);
   const productData = {
     name: formData.get('name'),
@@ -27,7 +28,7 @@ productForm.addEventListener('submit', async function(event) {
     responseElement.textContent = 'Product created successfully! Redirecting...';
 
     setTimeout(() => {
-      window.location.href = './layout.html'
+      window.location.href = '../index.html'
     }, 1500); 
 
   } catch (error) {
