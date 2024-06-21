@@ -18,6 +18,7 @@ const getProducts = async(req,res) =>
   {
    try{
     const product = await Product.find({});
+    console.log(pr)
     res.status(200).json(product);
    }
    catch(error){

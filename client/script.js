@@ -47,32 +47,32 @@ function getAll() {
           return res.json();
       })
       .then(parsedRes => {
-          const container = document.getElementById('post-container');
-          let postMarkup = '';
+        const container = document.getElementById('post-container');
+        let postMarkup = '';
 
-          parsedRes.forEach(item => {
-              // Construct the image URL assuming 'item.image' contains the filename
-              const imageUrl = `http://localhost:5000/uploads/${item.image}`;
+        parsedRes.forEach(item => {
+            
+            // Construct the image URL assuming 'item.image' contains the filename
+            const imageUrl = `/uploads/${item.image}`
+            postMarkup += `
+                <div class="data-item" style="border: 1px solid #ddd;">
+                    <h4>Name: ${item.name}</h4>
+                    <p>Price: ${item.price}</p>
+                    <p>Flat: ${item.flat}</p>
+                    <p>Square Feet: ${item.sqft}</p>
+                    <img src="${imageUrl}" alt="${item.name}"  class="product-image">
+                </div>
+            `;
+        });
 
-              postMarkup += `
-                  <div class="data-item" style="border: 1px solid #ddd;">
-                      <h4>Name: ${item.name}</h4>
-                      <p>Price: ${item.price}</p>
-                      <p>Flat: ${item.flat}</p>
-                      <p>Square Feet: ${item.sqft}</p>
-                      <img src="${imageUrl}" alt="${item.name}" style="max-width: 100%; height: auto;">
-                  </div>
-              `;
-          });
+        // CLEANING EXISTING PRODUCT HTML NODE/ELEMENT
+        container.innerHTML = '';
 
-          // CLEANING EXISTING PRODUCT HTML NODE/ELEMENT
-          container.innerHTML = '';
-
-          // Adding new product data markup
-          container.insertAdjacentHTML('beforeend', postMarkup);
-      })
-      .catch(err => {
-          console.error('Error fetching products:', err);
-          alert('Error fetching products. Please try again later.');
-      });
+        // Adding new product data markup
+        container.insertAdjacentHTML('beforeend', postMarkup);
+    })
+    .catch(err => {
+        console.error('Error fetching products:', err);
+        alert('Error fetching products. Please try again later.');
+    });
 }

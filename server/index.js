@@ -12,6 +12,7 @@ app.use(express.json()) //to read json
 app.use(express.urlencoded({extended:false})) // to read form & other formats
 
 
+
 //routes
 const productRoute = require("./routes/product.route.js")
 app.use("/api/products",productRoute)

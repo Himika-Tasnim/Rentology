@@ -7,6 +7,7 @@ body {
     margin: 0;
     background-color: #f8f9fa;
 }
+
 .btn {
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -18,9 +19,11 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .btn:hover {
     background-color: #0056b3;
 }
+
 .data-container {
     display: flex;
     flex-wrap: wrap;
@@ -33,6 +36,7 @@ body {
     width: 80%;
     max-width: 1200px;
 }
+
 .data-item {
     flex: 1 1 calc(33.333% - 40px);
     background-color: white;
@@ -42,19 +46,25 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
+
 .data-item:hover {
     transform: scale(1.05);
 }
+
 .data-item h4 {
     margin-top: 0;
     color: #333;
 }
+
 .data-item p {
     margin: 5px 0;
     color: #555;
 }
+
 .product-image {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    max-height: 200px; /* Adjust the max height as needed */
 }
