@@ -18,11 +18,12 @@ const storage = multer.diskStorage({
   
 const upload = multer({ storage: storage });
 
-const {createProduct,getProducts} = require ("../controllers/product.controller")
+const {createProduct,getProducts,bookProduct} = require ("../controllers/product.controller")
 
 
 router.post('/',upload.single('product'),createProduct)
 router.get('/',getProducts)
+router.put('/:id',bookProduct)
 
 
 
