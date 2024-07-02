@@ -1,9 +1,13 @@
 /* Basic CSS for form styling */
+body{
+  background-color: rgb(224, 244, 244);
+}
 form {
-    max-width: 300px;
+    max-width: 400px;
+    max-height: 90%;
     margin: auto;
     padding: 1em;
-    border: 1px solid #ccc;
+    border: 1px solid #0637b4;
     border-radius: 1em;
   }
   
@@ -16,7 +20,7 @@ form {
   }
   
   input, button {
-    width: 100%;
+    width: 90%;
     padding: 0.5em;
     margin-top: 0.5em;
   }

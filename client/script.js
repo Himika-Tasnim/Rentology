@@ -57,9 +57,11 @@ function getAll() {
             postMarkup += `
                 <div class="data-item" style="border: 1px solid #ddd;">
                     <h4>Name: ${item.name}</h4>
+                    <p>Address: ${item.address}</p>
                     <p>Price: ${item.price}</p>
                     <p>Flat: ${item.flat}</p>
                     <p>Square Feet: ${item.sqft}</p>
+                    <p>Description: ${item.description}</p>
                     <img src="${imageUrl}" alt="${item.name}"  class="product-image">
                 </div>
             `;

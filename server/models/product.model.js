@@ -4,7 +4,7 @@ const ProductSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please enter product name"],
+      required: [true, "Please enter the name of the house"],
     },
 
     flat: {
@@ -25,6 +25,14 @@ const ProductSchema = mongoose.Schema(
       default: 0,
     },
 
+    address: {
+      type: String,
+      required: [true, "Please enter the address"],
+    },
+    description: {
+      type: String,
+    },
+    
     image: {
       type: String,
     },
