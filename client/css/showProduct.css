@@ -8,21 +8,33 @@ body {
     background-color: #f8f9fa;
 }
 
-.btn {
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
+button {
+    background-color: #007bff; 
+    width: 40%;
+    padding: 10px;
     border: none;
     border-radius: 5px;
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 3%; /* Remove the left margin */
+    margin-right: 3%; /* Add a small right margin for spacing */
+    cursor: pointer;
+    display: inline-block; /* Ensure buttons are inline-block elements */
 }
 
-.btn:hover {
+button:hover {
     background-color: #0056b3;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align buttons in the center */
+    
+}
+
 
 .data-container {
     display: flex;
@@ -45,6 +57,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    max-width: 45%;
 }
 
 .data-item:hover {
@@ -54,6 +67,9 @@ body {
 .data-item h4 {
     margin-top: 0;
     color: #333;
+    text-align: center;
+    text-emphasis: bold;
+    font-size: 20px;
 }
 
 .data-item p {
@@ -62,9 +78,11 @@ body {
 }
 
 .product-image {
-    width: 100%;
+    width: 90%;
     height: auto;
     border-radius: 5px;
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    max-height: 200px; /* Adjust the max height as needed */
+    max-height: 250px; /* Adjust the max height as needed */
+    margin-left: 3%;
+    margin-top: 2%;
+    
 }
