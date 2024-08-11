@@ -27,13 +27,13 @@ async function getAllBookings() {
             const bookingDate = new Date(booking.bookingDate).toLocaleDateString();
 
             postMarkup += `
-                <div class="data-item">
+                <div class="data-item" style="border: 1px solid #ddd;">
                     <h4>${item.name}</h4>
                     <p>Address: ${item.address}</p>
                     <p>Price: ${item.price}</p>
                     <p>Square Feet: ${item.sqft} sqft</p>
                     <p>Booking Date: ${bookingDate}</p>
-                    <img src="${imageUrl}" alt="${item.name}">
+                    <img src="${imageUrl}" alt="${item.name}" class="product-image">
                     <div class="button-container">
                         <button onclick="cancelBooking('${booking._id}')">Cancel</button>
                     </div>
@@ -41,8 +41,12 @@ async function getAllBookings() {
             `;
         });
 
-        container.innerHTML = postMarkup;
+        // CLEANING EXISTING PRODUCT HTML NODE/ELEMENT
+        container.innerHTML = '';
 
+        // Adding new product data markup
+        container.insertAdjacentHTML('beforeend', postMarkup);
+        
     } catch (error) {
         console.error('Error fetching booked products:', error.message);
     }

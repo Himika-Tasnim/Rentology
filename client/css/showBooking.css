@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background-color: #f8f9fa;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically if needed */
+}
+
+button {
+    background-color: #007bff; 
+    width: auto; /* Allow the button to size itself based on content */
+    padding: 10px 20px; /* Add horizontal padding */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    display: inline-block; /* Ensure buttons are inline-block elements */
+    text-align: center; /* Center text inside the button */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+.data-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 1200px;
+}
+
+.data-item {
+    flex: 1 1 calc(33.333% - 40px);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    max-width: 45%;
+}
+
+.data-item:hover {
+    transform: scale(1.05);
+}
+
+.data-item h4 {
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+    text-emphasis: bold;
+    font-size: 20px;
+}
+
+.data-item p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.product-image {
+    width: 90%;
+    height: auto;
+    border-radius: 5px;
+    max-height: 250px; /* Adjust the max height as needed */
+    margin-left: 3%;
+    margin-top: 2%;
+    
+}

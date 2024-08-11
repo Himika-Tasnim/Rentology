@@ -2,6 +2,11 @@ const Product = require("../models/product.model.js");
 
 const Booking = require('../models/booking.model.js'); 
 const Wishlist = require("../models/wishlist.model.js");
+const User = require('../models/userModel');
+
+const nodemailer = require('nodemailer');
+require("dotenv").config()
+
 
 // POST - Create a new product
 const createProduct = async (req, res) => {
@@ -37,6 +42,25 @@ const getProducts = async (req, res) => {
   }
 };
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
+const sendMail = async (transporter, mailOptions) => {
+  try {
+      await transporter.sendMail(mailOptions);
+      console.log('Email has been sent.');
+  } catch (error) {
+      console.error('Error sending email:', error);
+  }
+};
 
 const bookProduct = async (req, res) => {
   try {
@@ -72,13 +96,37 @@ const bookProduct = async (req, res) => {
     // Save the booking to the database
     await newBooking.save();
 
-    // Send the updated product as JSON response
+    // Fetch user details for sending email
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User Not Found' });
+    }
+
+    // Set up email options
+    const mailOptions = {
+      from: {
+        name: 'Rentology',
+        address: process.env.EMAIL,
+      },
+      to: user.email,
+      subject: 'Booking Confirmation',
+      text: `Your booking for ${product.name} has been confirmed successfully.`,
+    };
+
+    // Send confirmation email
+    await sendMail(transporter, mailOptions);
+
+    // Send the updated product and booking as JSON response
     res.status(200).json({ product, booking: newBooking });
+
   } catch (error) {
     // Handle errors and send error response
-    res.status(500).json({ message: error.message });
+    console.error('Error in bookProduct:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
 
 
 const cancelBooking = async (req, res) => {
@@ -101,11 +149,32 @@ const cancelBooking = async (req, res) => {
       return res.status(404).json({ message: 'Associated Product Not Found' });
     }
 
+    // Find the user who made the booking
+    const user = await User.findById(booking.user);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User Not Found' });
+    }
+
     // Increment availability by 1
     product.flat += 1;
 
     // Save the updated product back to the database
     await product.save();
+
+    // Set up email options
+    const mailOptions = {
+      from: {
+        name: 'Rentology',
+        address: process.env.EMAIL,
+      },
+      to: user.email,
+      subject: 'Booking Cancellation',
+      text: `Your booking for ${product.name} has been cancelled.`,
+    };
+
+    // Send confirmation email
+    await sendMail(transporter, mailOptions);
 
     // Delete the booking from the database
     await Booking.findByIdAndDelete(bookingId);
@@ -117,6 +186,7 @@ const cancelBooking = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 const showBookedProperties = async (req, res) => {
@@ -192,5 +262,5 @@ module.exports = {
   addToWishlist,
   showBookedProperties,
   showWishlist,
-  cancelBooking
+  cancelBooking 
 };
