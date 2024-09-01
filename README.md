@@ -1,1 +1,1 @@
-# Rentology
+# Rentology.
