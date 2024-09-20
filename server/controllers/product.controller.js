@@ -17,6 +17,17 @@ const createProduct = async (req, res) => {
     // Assign uploaded image filename to req.body.image
     req.body.image = req.file.filename;
 
+    // Ensure availableDate and paymentType are included in the request body
+    const { availableDate, paymentType } = req.body;
+
+    if (!availableDate) {
+      return res.status(400).json({ message: "Please enter the date when the property will be available" });
+    }
+
+    if (!paymentType || !["per night", "per month"].includes(paymentType)) {
+      return res.status(400).json({ message: "Please specify a valid payment type (per night or per month)" });
+    }
+
     // Create a new product in the database
     const product = await Product.create(req.body);
 
@@ -27,6 +38,7 @@ const createProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // GET - Retrieve all products
 const getProducts = async (req, res) => {
@@ -90,7 +102,8 @@ const bookProduct = async (req, res) => {
     const newBooking = new Booking({
       product: product._id,
       user: req.user._id, // Extract user ID from the session
-      bookingDate: new Date()
+      bookingDate: new Date(),
+      paymentType:product.paymentType
     });
 
     // Save the booking to the database

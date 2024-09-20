@@ -26,6 +26,7 @@ async function getAllBookings() {
             const imageUrl = `/uploads/${item.image}`;
             const bookingDate = new Date(booking.bookingDate).toLocaleDateString();
 
+            // Use item.paymentType instead of just paymentType
             postMarkup += `
                 <div class="data-item" style="border: 1px solid #ddd;">
                     <h4>${item.name}</h4>
@@ -33,6 +34,7 @@ async function getAllBookings() {
                     <p>Price: ${item.price}</p>
                     <p>Square Feet: ${item.sqft} sqft</p>
                     <p>Booking Date: ${bookingDate}</p>
+                    <p>Payment Type: ${item.paymentType}</p>
                     <img src="${imageUrl}" alt="${item.name}" class="product-image">
                     <div class="button-container">
                         <button onclick="cancelBooking('${booking._id}')">Cancel</button>
@@ -51,6 +53,7 @@ async function getAllBookings() {
         console.error('Error fetching booked products:', error.message);
     }
 }
+
 
 async function cancelBooking(bookingId) {
     try {

@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema(
@@ -29,6 +30,7 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter the address"],
     },
+
     description: {
       type: String,
     },
@@ -36,12 +38,22 @@ const ProductSchema = mongoose.Schema(
     image: {
       type: String,
     },
+
+    availableDate: {
+      type: Date,
+      required: [true, "Please enter the date when the property will be available"],
+    },
+
+    paymentType: {
+      type: String,
+      enum: ["per night", "per month"],
+      required: [true, "Please specify whether the payment is per night or per month"],
+    },
   },
   {
     timestamps: true,
   }
 );
-
 
 const Product = mongoose.model("Product", ProductSchema);
 

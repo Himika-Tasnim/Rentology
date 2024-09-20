@@ -31,8 +31,10 @@ async function getWishlist() {
                     <h4>${item.name}</h4>
                     <p>Address: ${item.address}</p>
                     <p>Price: ${item.price}</p>
-                    <p>Availability: ${item.flat}</p>
+                    <p>Availabile Flats: ${item.flat}</p>
                     <p>Square Feet: ${item.sqft} sqft</p>
+                    <p>Available From: ${item.availableDate}</p>
+                    <p>Payment Type: ${item.paymentType}</p>
                     <img src="${imageUrl}" alt="${item.name}">
                 </div>
             `;

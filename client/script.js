@@ -65,23 +65,34 @@ async function addToWishlist(productId) {
 async function getAll() {
     try {
         const response = await fetch('http://localhost:5000/api/products');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const products = await response.json();
 
+        // Filter products that have at least 1 flat available
         const availableProducts = products.filter(item => item.flat >= 1);
 
+        // Reference to the container element
         const container = document.getElementById('post-container');
         let postMarkup = '';
 
         availableProducts.forEach(item => {
             // Construct the image URL assuming 'item.image' contains the filename
-            const imageUrl = `/uploads/${item.image}`
+            const imageUrl = `/uploads/${item.image}`;
+
+            // Format the available date
+            const formattedDate = new Date(item.availableDate).toLocaleDateString();
+
             postMarkup += `
                 <div class="data-item" style="border: 1px solid #ddd;">
-                    <h4> ${item.name}</h4>
+                    <h4>${item.name}</h4>
                     <p>Address: ${item.address}</p>
                     <p>Price: ${item.price}</p>
-                    <p>Availability: ${item.flat}</p>
+                    <p>Availabile Flats: ${item.flat}</p>
                     <p>Square Feet: ${item.sqft}</p>
+                    <p>Available From: ${formattedDate}</p>
+                    <p>Payment Type: ${item.paymentType}</p>
                     <img src="${imageUrl}" alt="${item.name}" class="product-image">
                     <div class="button-container">
                         <button onclick="bookProduct('${item._id}')">Book</button>
@@ -89,16 +100,14 @@ async function getAll() {
                     </div>
                 </div>
             `;
+        });
 
-            });
-        // CLEANING EXISTING PRODUCT HTML NODE/ELEMENT
+        // Clear existing content and insert new product data markup
         container.innerHTML = '';
-
-        // Adding new product data markup
         container.insertAdjacentHTML('beforeend', postMarkup);
         
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching products:', error.message || error);
     }
 }
 
