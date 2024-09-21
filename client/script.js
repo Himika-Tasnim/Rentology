@@ -64,7 +64,7 @@ async function addToWishlist(productId) {
 
 async function getAll() {
     try {
-        const response = await fetch('http://localhost:5000/api/products');
+        const response = await fetch(`http://localhost:5000/api/products`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -110,6 +110,9 @@ async function getAll() {
         console.error('Error fetching products:', error.message || error);
     }
 }
+
+
+
 
 // Fetch and display products when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', getAll);

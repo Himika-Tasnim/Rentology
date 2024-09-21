@@ -18,6 +18,8 @@ const productRoute = require("./routes/product.route.js")
 app.use("/api/products",productRoute)
 
 
+
+
 app.listen(PORT,()=>{
   console.log("Running")
 })

@@ -267,6 +267,7 @@ const showWishlist = async (req, res) => {
 };
 
 
+
 // Export all controller functions
 module.exports = { 
   createProduct,
@@ -275,5 +276,5 @@ module.exports = {
   addToWishlist,
   showBookedProperties,
   showWishlist,
-  cancelBooking 
+  cancelBooking,
 };
